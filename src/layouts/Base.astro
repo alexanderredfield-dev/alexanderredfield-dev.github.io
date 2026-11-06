@@ -1,0 +1,51 @@
+---
+// The shared frame around every page: header, menu, and footer.
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Alex Redfield: policy, land, and food systems.' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'About' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/consulting/', label: 'Consulting' },
+  { href: '/policy-tracker/', label: 'Policy Tracker' },
+];
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const fullTitle = title === 'Alex Redfield' ? title : `${title} · Alex Redfield`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <a class="name" href="/">Alex Redfield</a>
+        <nav aria-label="Main">
+          <ul>
+            {links.map((l) => (
+              <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer>
+      <div class="wrap">© {new Date().getFullYear()} Alex Redfield</div>
+    </footer>
+  </body>
+</html>

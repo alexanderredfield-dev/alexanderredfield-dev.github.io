@@ -1,0 +1,47 @@
+# Portfolio items. Each item starts with "- id:" and needs all six lines.
+# The id is a short unique name (lowercase, hyphens, no spaces).
+# Dates are written YYYY-MM-DD. Order doesn't matter: the page sorts newest first.
+#
+# These are PLACEHOLDERS. Replace them with your real work (aim for 6–10).
+
+- id: example-report
+  title: "Placeholder: Report title"
+  outlet: "Publisher or outlet"
+  date: 2026-09-15
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."
+
+- id: example-op-ed
+  title: "Placeholder: Op-ed title"
+  outlet: "Newspaper name"
+  date: 2026-06-02
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."
+
+- id: example-policy-brief
+  title: "Placeholder: Policy brief title"
+  outlet: "Organization name"
+  date: 2026-03-20
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."
+
+- id: example-data-project
+  title: "Placeholder: Data project title"
+  outlet: "Organization name"
+  date: 2025-11-10
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."
+
+- id: example-presentation
+  title: "Placeholder: Conference talk title"
+  outlet: "Conference name"
+  date: 2025-07-18
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."
+
+- id: example-article
+  title: "Placeholder: Article title"
+  outlet: "Magazine or journal"
+  date: 2025-02-05
+  link: "https://example.com/"
+  description: "One sentence on what this is and why it matters."

@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { formatDate } from '../lib/dates';
+
+// Items come from src/data/portfolio.yaml, shown newest first.
+const items = (await getCollection('portfolio')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+<Base title="Portfolio">
+  <h1>Portfolio</h1>
+  <p class="muted">Selected publications and projects.</p>
+  <ul class="list">
+    {items.map(({ data }) => (
+      <li>
+        <h2><a href={data.link}>{data.title}</a></h2>
+        <div class="meta">{data.outlet} · <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time></div>
+        <p>{data.description}</p>
+      </li>
+    ))}
+  </ul>
+</Base>
