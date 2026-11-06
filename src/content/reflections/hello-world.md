@@ -1,7 +1,7 @@
 ---
 title: "Placeholder: First post"
 date: 2026-11-06
-description: "A one-sentence summary that shows on the Writing page."
+description: "A one-sentence summary that shows on the Reflections page."
 ---
 
 This is a placeholder post. Replace it with your own writing, or delete this file.

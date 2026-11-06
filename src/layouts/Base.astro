@@ -1,22 +1,26 @@
 ---
 // The shared frame around every page: header, menu, and footer.
 import '../styles/global.css';
+import Seedling from '../components/Seedling.astro';
+import Contour from '../components/Contour.astro';
 
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'Alex Redfield: policy, land, and food systems.' } = Astro.props;
+const { title, description = 'Alex Redfield: land, food, and rural communities in New England.' } = Astro.props;
 
+// The menu. To rename a page in the menu, change its label here.
 const links = [
-  { href: '/', label: 'About' },
-  { href: '/writing/', label: 'Writing' },
-  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/reflections/', label: 'Reflections' },
+  { href: '/publications/', label: 'Publications and Projects' },
   { href: '/consulting/', label: 'Consulting' },
+  { href: '/community-action/', label: 'Community Action' },
   { href: '/policy-tracker/', label: 'Policy Tracker' },
+  { href: '/contact/', label: 'Contact' },
 ];
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const isCurrent = (href: string) => path.startsWith(href);
 const fullTitle = title === 'Alex Redfield' ? title : `${title} · Alex Redfield`;
 ---
 <!doctype html>
@@ -27,11 +31,18 @@ const fullTitle = title === 'Alex Redfield' ? title : `${title} · Alex Redfield
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" />
   </head>
   <body>
-    <header>
-      <div class="wrap">
-        <a class="name" href="/">Alex Redfield</a>
+    <div class="wrap">
+      <header class="site-header">
+        <div class="masthead">
+          <a class="name" href="/">Alex Redfield</a>
+          <Seedling />
+        </div>
+        <Contour />
         <nav aria-label="Main">
           <ul>
             {links.map((l) => (
@@ -39,13 +50,11 @@ const fullTitle = title === 'Alex Redfield' ? title : `${title} · Alex Redfield
             ))}
           </ul>
         </nav>
-      </div>
-    </header>
-    <main class="wrap">
-      <slot />
-    </main>
-    <footer>
-      <div class="wrap">© {new Date().getFullYear()} Alex Redfield</div>
-    </footer>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">© {new Date().getFullYear()} Alex Redfield · South Portland, Maine</footer>
+    </div>
   </body>
 </html>
