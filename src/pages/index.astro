@@ -1,23 +1,35 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { formatShortDate } from '../lib/dates';
+
+// The five newest reflections show on the home page.
+const recent = (await getCollection('reflections', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
 ---
 <Base title="Alex Redfield">
-  <h1>Hi, I'm Alex Redfield.</h1>
+  <p class="sub">Land, food &amp; rural communities · New England</p>
   <p>
     [Placeholder intro. A few sentences on who you are and what you work on:
-    conservation, forest, and farmland policy in New England, and consulting on
-    farmland and rural vitality.]
+    conservation, forest, and farmland policy, and who gets access to land.]
   </p>
   <p>
     [Placeholder: current roles, for example Policy Director at Wildlands,
     Woodlands, Farmlands &amp; Communities, and consulting through Radicle Strategy LLC.]
   </p>
-  <h2>Elsewhere on this site</h2>
-  <ul>
-    <li><a href="/writing/">Writing</a>: essays and notes.</li>
-    <li><a href="/portfolio/">Portfolio</a>: published work and projects.</li>
-    <li><a href="/consulting/">Consulting</a>: past and current work, and what I can help with.</li>
-    <li><a href="/policy-tracker/">Policy Tracker</a>: New England conservation, forest, and farmland legislation.</li>
-  </ul>
-  <p>[Placeholder: how to reach you, for example an email address.]</p>
+
+  {recent.length > 0 && (
+    <>
+      <p class="label">Recent reflections</p>
+      <ul class="index">
+        {recent.map((post) => (
+          <li>
+            <a href={`/reflections/${post.id}/`}>{post.data.title}</a>
+            <time datetime={post.data.date.toISOString()}>{formatShortDate(post.data.date)}</time>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
 </Base>
